@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react'; // Import React and other necessary components
 import { Button, StyleSheet, Text, View } from 'react-native';
 import { Audio } from 'expo-av';
-import * as Sharing from 'expo-sharing';
+
 
 export default function App() {
   const [recording, setRecording] = useState();
