@@ -76,12 +76,10 @@ export default function App() {
           Recording {index + 1} - {recordingLine.durationFormatted}
         </Text>
         <Button
-          style={styles.button}
           onPress={() => playRecording(recordingLine.audioPath)}
           title="Play"
         />
         <Button
-          style={styles.button}
           onPress={() => Sharing.shareAsync(recordingLine.audioPath)}
           title="Share"
         />
@@ -118,13 +116,5 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 16,
   },
-  button: {
-    margin: 16,
-    borderRadius:40,
 
-  },
-
-  button2 : {
-    borderRadius:40
-  }
 });
