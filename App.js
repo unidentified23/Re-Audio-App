@@ -69,6 +69,17 @@ export default function App() {
     }
   }
 
+  function deleteRecording(index) {
+    try{
+    const updatedRecordings = [...recordings];  //copying the current recordings array
+    updatedRecordings.splice(index,1);  //removing a recording at the specified index
+
+    setRecordings(updatedRecordings); //update the state of recordings with the updated recording array
+  } catch (error) {
+    console.error('Errror playing sound:',error)
+    }
+  }
+
   function getRecordingLines() {
     return recordings.map((recordingLine, index) => (
       <View key={index} style={styles.row}>
@@ -77,11 +88,12 @@ export default function App() {
         </Text>
         <Button
           onPress={() => playRecording(recordingLine.audioPath)}
-          title="Play"
+          title='play'
         />
         <Button
-          onPress={() => Sharing.shareAsync(recordingLine.audioPath)}
-          title="Share"
+          onPress={() => deleteRecording(index)}
+          title="delete"
+          color="red"
         />
       </View>
     ));
@@ -90,10 +102,13 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text>{message}</Text>
-      <Button style= {styles.button2}
+     
+      <Button 
         title={recording ? 'Stop Recording' : 'Start Recording'}
         onPress={recording ? stopRecording : startRecording}
+        borderRadius={40}
       />
+      
       {getRecordingLines()}
       <StatusBar style="auto" />
     </View>
@@ -103,7 +118,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#BCD0C7",
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -116,5 +131,6 @@ const styles = StyleSheet.create({
     flex: 1,
     margin: 16,
   },
+
 
 });
