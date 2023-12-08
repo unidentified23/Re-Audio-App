@@ -1,9 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { useNavigation } from "@react-navigation/native";
-import { StyleSheet, Form, Text, View, TextInput,TouchableOpacity, } from 'react-native';
+import { StyleSheet, Text, View, TextInput,TouchableOpacity, } from 'react-native';
 import { db } from "./config.js";
+import { collection,addDoc } from "firebase/firestore";
 import { createUserWithEmailAndPassword, getAuth } from 'firebase/auth';
+
 // import  Card from '../components/Card.js';
 
 
@@ -14,6 +16,7 @@ export default function Register () {
   const [password, onChangePassword] = useState('');
   const navigation = useNavigation();
   const authentication =getAuth();
+  
   const handleSignUp = async ()=> {
      
     try {
@@ -28,7 +31,7 @@ export default function Register () {
        };
        const docRef = addDoc(dbh,userData);
        console.log("User data added with ID: ",docRef.id);
-       alert("Welcome"+name);
+       alert("Welcome "+name);
        navigation.navigate("Home");
 
     }catch(error){
@@ -57,16 +60,13 @@ export default function Register () {
           value={name}
           placeholder='Enter your name'
         />
-       
-      
-         
-          <TextInput
+       <TextInput
           style={styles.Loginput}
           onChangeText={onChangeSurname}
           value={surname}
           placeholder='Enter your surname'
         />
-          <TextInput
+       <TextInput
           style={styles.Loginput}
           onChangeText={onChangeEmail}
           value={Email}
@@ -84,12 +84,6 @@ export default function Register () {
          <Text style={styles.BtnTxt}>Register</Text>
         
         </TouchableOpacity>
-
-        
-
-        
-     
-
        <Text style={styles.LogTxt2}>Already have an account?</Text>
        <Text style={styles.LogTxt3}  onPress={()=> navigation.navigate("login")} >Click here</Text>
 
@@ -152,11 +146,9 @@ const styles = StyleSheet.create({
     },
 
     BtnTxt : {
-      paddingLeft:"10%",
       fontSize:16,
       fontWeight: "600",
       color:"white",
       alignSelf:"center",
-      
     },
 });

@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { StyleSheet, Image, Text, View, TextInput,TouchableOpacity, } from 'react-native';
 import Bruno from '../assets/bruno.jpg';
 import { useNavigation } from "@react-navigation/native";
+import SignOut from '../components/SignOut';
 
 export default function Profile () {
   const [Email, onChangeEmail] = useState('');
@@ -14,6 +15,16 @@ export default function Profile () {
   const toHome =()=>{
     navigation.navigate('Home');
   };
+
+  const readDataFromFirestore = async (users, UYZNNpfVbcLZuPYVBIUN ) => {
+    try {
+      const ref = firebase.firestore().collection(users).doc(UYZNNpfVbcLZuPYVBIUN )
+      const response = await ref.get()
+      return response
+    } catch (error) {
+      return error
+    }
+  }
   
   return (
     <View style={styles.container}>
@@ -38,6 +49,9 @@ export default function Profile () {
         <TouchableOpacity style={styles.button} onPress={toHome}  >
           <Text style={styles.BtnTxt}>Recordings</Text>
         </TouchableOpacity>
+        <SignOut/>
+        
+
        
 
       <StatusBar style="auto" />

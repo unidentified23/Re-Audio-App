@@ -2,14 +2,29 @@ import { StatusBar } from 'expo-status-bar';
 import { useState } from 'react';
 import { useNavigation } from "@react-navigation/native";
 import { StyleSheet, Form, Text, View, TextInput,TouchableOpacity, } from 'react-native';
+import { signInWithEmailAndPassword, getAuth } from 'firebase/auth';
 
 export default function Login () {
   const [Email, onChangeEmail] = useState('');
   const [password, onChangePassword] = useState('');
   const navigation = useNavigation(); 
+  const auth = getAuth();
 
-  const handlelogin =()=>{
-    navigation.navigate("Home");
+  const handlelogin  = async ()=>{
+
+    try {
+      const signInUser = await signInWithEmailAndPassword(auth, Email, password);
+      console.log(signInUser); 
+      alert("Logged in successfully Welcome "+Email);
+      navigation.navigate("Home");
+
+   }catch(error){
+     const errorMessage = error.message;
+     console.log(errorMessage)
+     alert("Login failed: "+ errorMessage)
+   
+   } 
+
   }
   return (
     <View style={styles.container}>

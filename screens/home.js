@@ -1,7 +1,7 @@
 import { StatusBar } from 'expo-status-bar';
 import React, { useState, useEffect } from 'react'; // Import React and other necessary components
 import {StyleSheet, ScrollView, Text, View,TouchableOpacity } from 'react-native';
-import { Audio } from 'expo-av';
+import { Audio, AndroidOutputFormat } from 'expo-av';
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
